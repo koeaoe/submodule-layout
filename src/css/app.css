@@ -1,0 +1,13 @@
+/* 
+    Created on : 2016-01-07, 15:40:33
+    Author     : Krzysztof Proczek <proczekweb@gmail.com>
+*/
+html {
+  background: red;
+}
+html body {
+  font-family: red;
+}
+html body h1 {
+  color: yellow;
+}
