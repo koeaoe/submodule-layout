@@ -2,12 +2,27 @@
     Created on : 2016-01-07, 15:40:33
     Author     : Krzysztof Proczek <proczekweb@gmail.com>
 */
-html {
-  background: red;
-}
 html body {
-  font-family: red;
+  background: yellow;
 }
-html body h1 {
-  color: yellow;
+html body .container-fluid {
+  padding: 0;
+  margin: 0;
+}
+html body .container-fluid .menubar {
+  height: 100vh;
+  background: yellow;
+}
+html body .container-fluid .content {
+  background: blue;
+}
+@media (max-width: 767px) {
+  .menubar {
+    width: 100% !important;
+    height: auto !important;
+    background: red !important;
+  }
+  .content {
+    width: 100% !important;
+  }
 }

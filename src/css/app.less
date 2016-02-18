@@ -2,14 +2,28 @@
     Created on : 2016-01-07, 15:40:33
     Author     : Krzysztof Proczek <proczekweb@gmail.com>
 */
+@import "../assets/bootstrap/less/variables.less";
+
+@menuBackground: yellow;
+@contentBackground: blue;
 
 html {
-    background:red;
     body {
-        font-family: red;
-        
-        h1 {
-            color: yellow;
+        background: @menuBackground;
+
+        .container-fluid {
+            padding:0;
+            margin:0;
+
+            .menubar {
+                height:100vh;
+                background: @menuBackground;
+            }
+            .content {
+                background: @contentBackground;
+            }
         }
     }
 }
+
+@import "media.less";

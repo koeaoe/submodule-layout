@@ -17,6 +17,10 @@
     "grunt-contrib-uglify": "~0.11.0"
   },
   "assetsDir": "src/assets/",
+  "srcDir": "src/",
+  "devDir": "dev/",
+  "srcCSS": "src/css/",
+  "srcJS": "src/js/",
   "vendorJS": "vendor/js/",
   "vendorCSS": "vendor/css/"
 }

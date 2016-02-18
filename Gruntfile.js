@@ -10,7 +10,7 @@ module.exports = function(grunt) {
                 expand: true, 
                 cwd: 'bower_components',
                 src: '**',
-                dest: 'src/assets/'
+                dest: '<%= pkg.assetsDir %>'
             },
             dev: {
                 files: [
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
                     paths: ["src/css"]
                 }, 
                 files: {
-                    "src/css/app.css": "src/css/app.less"
+                    "<%= pkg.srcCSS %>app.css": "<%= pkg.srcCSS %>app.less"
                 }
             }
             
@@ -49,28 +49,28 @@ module.exports = function(grunt) {
             js: {
                 src: [
                     '<%= pkg.vendorJS %>**/*.js', 
-                    'src/js/**/*.js', 
+                    '<%= pkg.srcJS %>**/*.js',
                     '<%= pkg.assetsDir %>bootstrap/dist/js/bootstrap.js'
                 ],
-                dest: 'dev/app.js'
+                dest: '<%= pkg.devDir %>app.js'
             },
             css: {
                 src: [
                     '<%= pkg.vendorCSS %>**/*.css', 
-                    'src/css/**/*.css', 
+                    '<%= pkg.srcCSS %>**/*.css',
                     '<%= pkg.assetsDir %>bootstrap/dist/css/bootstrap-theme.css',
                     '<%= pkg.assetsDir %>bootstrap/dist/css/bootstrap.css'
                 ],
-                dest: 'dev/app.css'
+                dest: '<%= pkg.devDir %>app.css'
             }
             
         },
         
         homepage: {
             
-            template: 'src/index.html',
+            template: '<%= pkg.srcDir %>index.html',
             dev: {
-                dest: 'dev/index.html',
+                dest: '<%= pkg.devDir %>index.html',
                 context: {
                     js: 'app.js',
                     css: 'app.css'
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
                 tasks: ['concat:css']
             },
             less: {
-                files: ['src/css/app.less'],
+                files: ['src/css/app.less', 'src/css/media.less'],
                 tasks: ['less']
             },
             homepage: {
