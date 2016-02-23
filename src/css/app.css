@@ -2,20 +2,60 @@
     Created on : 2016-01-07, 15:40:33
     Author     : Krzysztof Proczek <proczekweb@gmail.com>
 */
+.darken {
+  background: #dedede;
+}
+.lighten {
+  background: #ffffff;
+}
+.saturate {
+  background: #f8f6f6;
+}
+.desaturate {
+  background: #f7f7f7;
+}
+.clear-spacing {
+  margin: 0;
+  padding: 0;
+}
 html body {
-  background: yellow;
+  background: #f7f7f7;
 }
 html body .container-fluid {
-  padding: 0;
   margin: 0;
+  padding: 0;
+}
+html body .container-fluid .nav-top-bar {
+  width: 100%;
+  height: 70px;
+}
+html body .container-fluid .content-top-bar {
+  width: 100%;
+  height: 70px;
+  height: 75px;
 }
 html body .container-fluid .menubar {
+  margin: 0;
+  padding: 0;
   height: 100vh;
-  background: yellow;
+  background: #f7f7f7;
+}
+html body .container-fluid .menubar .nav-item .nav-anchor {
+  display: block;
+  padding: 10px;
+}
+html body .container-fluid .menubar .nav-item .nav-anchor:hover {
+  background: #ffffff;
+  text-decoration: none;
 }
 html body .container-fluid .content {
-  background: blue;
+  height: 100vh;
+  background: #ffffff;
 }
+/*
+    Created on : 2016-01-07, 15:40:33
+    Author     : Krzysztof Proczek <proczekweb@gmail.com>
+*/
 @media (max-width: 767px) {
   .menubar {
     width: 100% !important;

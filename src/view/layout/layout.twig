@@ -1,0 +1,43 @@
+{{ doctype() }}
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %}{{ translate("Homepage") }}{% endblock title %}</title>
+
+    {% block stylesheets %}
+        {% do headLink().appendStylesheet({'rel': 'stylesheet', 'href': 'dist/app.css'}) %}
+        {{ headLink() }}
+    {% endblock %}
+</head>
+<body>
+<div class="container-fluid">
+
+    <nav class="col-sm-4 menubar">
+
+        {{ basePath('/') }}
+
+        <div class="nav-top-bar">Logo</div>
+
+        <div class="nav-item"><a class="nav-anchor" href="#Pulpit">Pulpit</a></div>
+        <div class="nav-item"><a class="nav-anchor" href="#Formularze">Formularze</a></div>
+        <div class="nav-item"><a class="nav-anchor" href="#Ankiety">Ankiety</a></div>
+        <div class="nav-item"><a class="nav-anchor" href="#Użytkownicy">Użytkownicy</a></div>
+        <div class="nav-item"><a class="nav-anchor" href="#Ustawienia">Ustawienia</a></div>
+
+    </nav>
+
+    <div class="col-xs-20 content">
+        <div class="content-top-bar">
+        </div>
+
+        {% block content %}{% endblock %}
+    </div>
+
+</div>
+{% block javascripts %}
+    {% do headScript().appendFile('dist/app.js', 'text/javascript') %}
+    {{ headScript() }}
+{% endblock %}
+</body>
+</html>

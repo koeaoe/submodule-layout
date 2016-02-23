@@ -4,26 +4,89 @@
 */
 @import "../assets/bootstrap/less/variables.less";
 
-@menuBackground: yellow;
-@contentBackground: blue;
+@menuBackground: #f7f7f7;
+@contentBackground: #ffffff;
+
+@start-color: @menuBackground;
+
+@lighten-percentage: 10%;
+@darken-percentage: 10%;
+@saturate-percentage: 15%;
+@desaturate-percentage: 50%;
+
+.darken {
+  background: darken(@start-color, @darken-percentage)
+}
+
+.lighten {
+  background: lighten(@start-color, @lighten-percentage)
+}
+
+.saturate {
+  background: saturate(@start-color, @saturate-percentage)
+}
+
+.desaturate {
+  background: desaturate(@start-color, @desaturate-percentage)
+}
+
+@menuAnchorPadding: 10px;
+@navbarHeight: 70px;
+
+.clear-spacing {
+
+  margin: 0;
+  padding: 0;
+
+}
 
 html {
-    body {
+  body {
+    background: @menuBackground;
+
+    .container-fluid {
+
+      .clear-spacing;
+
+      .nav-top-bar {
+        width: 100%;
+        height: @navbarHeight;
+      }
+      .content-top-bar {
+        .nav-top-bar;
+        height: @navbarHeight + (@menuAnchorPadding/2);
+      }
+      .menubar {
+
+        .clear-spacing;
+        height: 100vh;
         background: @menuBackground;
 
-        .container-fluid {
-            padding:0;
-            margin:0;
+        .nav-item {
 
-            .menubar {
-                height:100vh;
-                background: @menuBackground;
+          .nav-anchor {
+
+            display: block;
+            padding: @menuAnchorPadding;
+
+            &:hover {
+              .lighten;
+              text-decoration: none;
             }
-            .content {
-                background: @contentBackground;
-            }
+          }
+
         }
+
+      }
+      .content {
+
+        height: 100vh;
+        background: @contentBackground;
+
+      }
+
     }
+  }
 }
 
 @import "media.less";

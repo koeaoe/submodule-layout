@@ -1,86 +1,89 @@
-module.exports = function(grunt) {
-    
+/*
+ Created on : 2016-01-07, 15:40:33
+ Author     : Krzysztof Proczek <proczekweb@gmail.com>
+ */
+
+module.exports = function (grunt) {
+
     grunt.initConfig({
 
         pkg: grunt.file.readJSON("package.json"),
 
         copy: {
-            
             main: {
-                expand: true, 
-                cwd: 'bower_components',
-                src: '**',
-                dest: '<%= pkg.assetsDir %>'
-            },
-            dev: {
                 files: [
-                    {
-                        expand: true,
-                        cwd: '<%= pkg.assetsDir %>jquery/dist',
-                        src: 'jquery.js',
-                        dest: '<%= pkg.vendorJS %>' 
-                    },
-                    {
-                        expand: true,
-                        cwd: '<%= pkg.assetsDir %>angular',
-                        src: 'angular.js',
-                        dest: '<%= pkg.vendorJS %>' 
-                    }
+                    {expand: true, cwd: 'bower_components', src: '**', dest: '<%= pkg.assetsDir %>'},
+                    {expand: true, cwd: 'src/assets/font-awesome/fonts', src: '**', dest: '<%= pkg.distDir %>/fonts'},
+                    {expand: true, cwd: 'src/images', src: '**', dest: '<%= pkg.distDir %>/images'}
                 ]
             }
-            
         },
 
         less: {
-            
-            development: {
+
+            dev: {
                 options: {
                     paths: ["src/css"]
-                }, 
+                },
                 files: {
                     "<%= pkg.srcCSS %>app.css": "<%= pkg.srcCSS %>app.less"
                 }
             }
-            
+
         },
 
         concat: {
-            
+
             js: {
                 src: [
-                    '<%= pkg.vendorJS %>**/*.js', 
+                    '<%= pkg.assetsDir %>jquery/dist/jquery.js',
+                    '<%= pkg.assetsDir %>angular/angular.js',
                     '<%= pkg.srcJS %>**/*.js',
                     '<%= pkg.assetsDir %>bootstrap/dist/js/bootstrap.js'
                 ],
-                dest: '<%= pkg.devDir %>app.js'
+                dest: '<%= pkg.distDir %>app.js'
             },
             css: {
                 src: [
-                    '<%= pkg.vendorCSS %>**/*.css', 
                     '<%= pkg.srcCSS %>**/*.css',
                     '<%= pkg.assetsDir %>bootstrap/dist/css/bootstrap-theme.css',
                     '<%= pkg.assetsDir %>bootstrap/dist/css/bootstrap.css'
                 ],
-                dest: '<%= pkg.devDir %>app.css'
+                dest: '<%= pkg.distDir %>app.css'
             }
-            
+
         },
-        
+
+        // template tasks
         homepage: {
-            
-            template: '<%= pkg.srcDir %>index.html',
+
+            template: '<%= pkg.srcDir %>view/application/index/index<%= pkg.gruntTplExt %>',
             dev: {
-                dest: '<%= pkg.devDir %>index.html',
+                dest: '<%= pkg.zendModules %>Application/view/application/index/index<%= pkg.tplEngineExt %>',
                 context: {
                     js: 'app.js',
                     css: 'app.css'
                 }
             }
-            
+
         },
-        
+
+        layout: {
+
+            template: '<%= pkg.srcDir %>view/layout/layout<%= pkg.gruntTplExt %>',
+            dev: {
+                dest: '<%= pkg.zendModules %>Application/view/layout/layout<%= pkg.tplEngineExt %>',
+                context: {
+                    js: 'app.js',
+                    css: 'app.css'
+                }
+            }
+
+        },
+        // end template tasks
+
         watch: {
-            
+
             js: {
                 files: ['<%= concat.js.src %>'],
                 tasks: ['concat:js']
@@ -96,20 +99,24 @@ module.exports = function(grunt) {
             homepage: {
                 files: ['<%= homepage.template %>'],
                 tasks: ['homepage:dev']
+            },
+            layout: {
+                files: ['<%= layout.template %>'],
+                tasks: ['layout:dev']
             }
-            
+
         }
 
-    });  
+    });
 
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-less");
-  
+
     grunt.loadTasks("tasks");
-  
-    grunt.registerTask("default", ["copy:main", "copy:dev", "less:development", "concat" , "homepage:dev", "watch" ] );
-    
+
+    grunt.registerTask("default", ["copy:main", "less:dev", "concat", "homepage:dev", "layout:dev", "watch"]);
+
 };
